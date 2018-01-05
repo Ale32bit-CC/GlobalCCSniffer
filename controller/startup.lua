@@ -1,6 +1,6 @@
 local m = peripheral.find("modem")
 m.open(0) --control channel
-m.open(1) --listen channel
+
 local slaves = {}
 for k,v in ipairs(peripheral.getNames()) do
     if peripheral.getType(v) == "computer" then
@@ -53,7 +53,8 @@ for k,v in ipairs(slaves) do
         action="open"
     })
 end
-
+m.open(1) --listen channel
+printError("Ready")
 while true do
     local ev = {os.pullEvent()}
     if ev[1]== "modem_message" then
